@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Arisa's Kitchen — Good Food • Great Mood</title>
+<meta name="description" content="Order fresh, homemade meals, book a table or your next event at Arisa's Kitchen, Nairobi. Good Food • Great Mood.">
+<meta name="theme-color" content="#ffc20e">
+<meta property="og:title" content="Arisa's Kitchen — Enjoy Every Bite">
+<meta property="og:description" content="Order online, book a table or an event. Delicious • Fresh • Homemade.">
+<meta property="og:image" content="assets/logo.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Arisa's">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Kaushan+Script&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="assets/food-spread.webp">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-cart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6.2M10 21a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm9 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M12 20s-7-4.4-9.2-8.6C1.2 8.2 3 4.5 6.6 4.5c2.1 0 3.4 1.2 4.4 2.6 1-1.4 2.3-2.6 4.4-2.6 3.6 0 5.4 3.7 3.8 6.9C19 15.6 12 20 12 20Z"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M12 21s-7-6.2-7-11.5a7 7 0 1 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 3h3.5l1.5 4.5-2.2 1.4a11 11 0 0 0 7.3 7.3l1.4-2.2L21 15.5V19a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m3.5 6 8.5 7 8.5-7" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M7 3v8a2 2 0 0 0 4 0V3M9 11v10M17 21V3c-2.2 0-4 2.5-4 7h4"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 3v4M16 3v4M3 10h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-track" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8" fill="#fff" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="17.5" r="1.8" fill="#fff" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-dl" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0 4-4m-4 4-4-4M5 20h14"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.4.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3Z"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M14 8V6.5c0-.7.4-1 1-1h1.5V3H14c-2.2 0-3.5 1.4-3.5 3.6V8H8.5v2.6h2V21H14V10.6h2.2L16.5 8Z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-tt" viewBox="0 0 24 24"><path fill="currentColor" d="M16.5 3c.3 2.2 1.6 3.6 3.8 3.8v3a7 7 0 0 1-3.8-1.2v6.3A5.6 5.6 0 1 1 11 9.3v3.1a2.6 2.6 0 1 0 2.4 2.6V3Z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24"><path fill="currentColor" d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.6 2.6 0 0 0-1.8 1.8C2 8.8 2 12 2 12s0 3.2.4 4.8a2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8c.4-1.6.4-4.8.4-4.8s0-3.2-.4-4.8ZM10 15V9l5.2 3Z"/></symbol>
+  </defs>
+</svg>
+
+<div class="splash" id="splash" aria-hidden="true"><img src="assets/logo.png" alt=""></div>
+
+<div class="topbar">
+  <div class="wrap">
+    <span id="openPill" class="open-pill"><i></i><em style="font-style:normal">Open now</em></span>
+    <span class="hide-m"><svg width="15" height="15"><use href="#i-pin"/></svg><b data-biz="address"></b></span>
+    <span class="hide-m"><svg width="15" height="15"><use href="#i-phone"/></svg><b data-biz="phone"></b></span>
+    <div class="soc" id="socials"></div>
+  </div>
+</div>
+
+<header class="site" id="hdr">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Arisa's Kitchen home">
+      <img src="assets/logo-sm.png" alt="" width="52" height="52">
+      <span><b>Arisa's Kitchen</b><small>GOOD FOOD • GREAT MOOD</small></span>
+    </a>
+    <nav class="main" aria-label="Main">
+      <a href="#home" class="active">Home</a>
+      <a href="#signature">Signature</a>
+      <a href="#menu">Menu</a>
+      <a href="#events">Events</a>
+      <a href="#book">Book</a>
+      <a href="#vibe">Vibe</a>
+      <a href="#merch">Merch</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <div class="hdr-actions">
+      <button class="btn btn-sm btn-ghost" id="installBtn"><svg width="16" height="16"><use href="#i-dl"/></svg>Install app</button>
+      <button class="icon-btn" data-open="track" aria-label="Track order"><svg width="22" height="22"><use href="#i-track"/></svg></button>
+      <button class="icon-btn cart-btn" data-open="cart" aria-label="Open cart"><svg width="24" height="24"><use href="#i-cart"/></svg><span class="badge" data-cart-count>0</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div>
+      <img class="hero-logo" src="assets/logo.png" alt="Arisa's Kitchen logo">
+      <h1>Enjoy <span class="u">Every Bite…<svg viewBox="0 0 300 20" preserveAspectRatio="none"><path d="M3 14 C 80 4, 200 4, 297 12" stroke="#d7261e" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span></h1>
+      <div class="sub"><span>Delicious</span><i>•</i><span>Fresh</span><i>•</i><span>Homemade</span></div>
+      <p class="lead">Fire-grilled favourites, Kenyan classics and fresh juices, cooked with love in Nairobi. Order in a few taps, book a table, or let us cater your next celebration.</p>
+      <div class="cta-row">
+        <a href="#menu" class="btn btn-red" data-ripple>Order Now <span class="arr">›</span></a>
+        <a href="#book" class="btn btn-ghost" data-ripple>Book a table / event</a>
+      </div>
+      <div class="hero-trust">
+        <span>🛵 Delivery in ~35 min</span>
+        <span>📱 M-Pesa & cash</span>
+        <span>🎉 Events & catering</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="disc"></div>
+      <div class="plate"><img src="assets/plate.jpg" alt=""></div>
+      <div class="steam"><span></span><span></span><span></span></div>
+      <span class="float f1">🍅</span><span class="float f2">🌿</span><span class="float f3">🌶️</span><span class="float f4">🍃</span>
+      <div class="chip-float c1">🔥<span>Fire-Grilled Chicken<small>Today's best seller</small></span></div>
+      <div class="chip-float c2">⏱️<span>Ready in 25 min<small>Hot & fresh to you</small></span></div>
+    </div>
+  </div>
+  <div class="spread" id="spread">
+    <img src="assets/food-spread.webp" srcset="assets/food-spread-sm.webp 900w, assets/food-spread.webp 1600w" sizes="(max-width:900px) 100vw, 1280px" width="1600" height="490" alt="A table of Arisa's dishes: grilled chicken, burger, fries, pilau, spaghetti and fresh juice">
+  </div>
+  <svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 30 C 240 70 480 0 720 25 S 1200 60 1440 20 V60 H0Z" fill="#3a1a0d"/></svg>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div><svg width="26" height="26"><use href="#i-menu"/></svg>Freshly made with love</div>
+    <div><svg width="26" height="26" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M5 19c8 0 14-6 14-14C11 5 5 11 5 19Zm0 0 7-7"/></svg>Quality ingredients</div>
+    <div><svg width="26" height="26" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 17h16M6 17a6 6 0 0 1 12 0M12 8V6M10 6h4"/></svg>Great taste</div>
+    <div><svg width="26" height="26"><use href="#i-track"/></svg>Fast delivery</div>
+    <div><svg width="26" height="26" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 14a4 4 0 0 0 7 0M9 9.5h.01M15 9.5h.01" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>Happy customers</div>
+  </div>
+</div>
+
+<!-- SIGNATURE -->
+<section class="block" id="signature">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Chef's favourites</span>
+      <h2>Signature Dishes</h2>
+      <p>The plates that made our name. Tap any dish to customise it and add it to your order.</p>
+      <div class="bar"></div>
+    </div>
+    <div class="sig-grid" id="sigGrid"></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="block" id="menu">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Hungry?</span>
+      <h2>Our Menu</h2>
+      <p>Grilled, Kenyan, international, burgers, juices and desserts. Delivery or pickup.</p>
+      <div class="bar"></div>
+    </div>
+    <div class="menu-tools">
+      <label class="search"><span aria-hidden="true">🔍</span><span class="sr-only">Search menu</span><input id="q" type="search" placeholder="Search chicken, pilau, juice…" autocomplete="off"></label>
+      <div class="chips" id="cats" role="tablist" aria-label="Menu categories"></div>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section class="block" id="events">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">What's happening</span>
+      <h2>Upcoming Events</h2>
+      <p>Music, brunches and masterclasses. Reserve your spot in seconds.</p>
+      <div class="bar"></div>
+    </div>
+    <div class="events" id="eventsGrid"></div>
+    <div class="host-cta reveal">
+      <div><h3>Host your event with us</h3><p>Birthdays, office lunches, weddings, private chef nights. We handle the food, you enjoy the mood.</p></div>
+      <button class="btn btn-sun" data-book="catering" data-ripple>Plan my event <span class="arr">›</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="block" id="book">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Save your seat</span>
+      <h2>Book a Table or Event</h2>
+      <p>Four quick steps. We confirm by WhatsApp or a call.</p>
+      <div class="bar"></div>
+    </div>
+    <div class="book-shell">
+      <aside class="book-aside reveal">
+        <img src="assets/chef-studio.jpg" alt="Chef in Arisa's Kitchen uniform" loading="lazy">
+        <div class="in">
+          <h3>Why book with us?</h3>
+          <p>From a quiet dinner for two to a 300-guest wedding.</p>
+          <ul>
+            <li>✅ <span><b>Instant reference</b><br>Get a booking code you can track</span></li>
+            <li>🎂 <span><b>Celebrations sorted</b><br>Cake, decor & a birthday song on request</span></li>
+            <li>🚚 <span><b>We come to you</b><br>Full catering & private chef service</span></li>
+          </ul>
+        </div>
+      </aside>
+      <form class="card reveal" id="bookForm" novalidate>
+        <div class="steps" id="bSteps">
+          <div class="s cur"><i></i>Type</div><div class="s"><i></i>Date & time</div><div class="s"><i></i>Guests</div><div class="s"><i></i>Details</div>
+        </div>
+        <div class="pane on" data-p="0">
+          <h3>What are you booking?</h3>
+          <p class="hint">Pick one. You can add notes later.</p>
+          <div class="types" id="bTypes"></div>
+          <div id="evPick" style="display:none">
+            <span class="lbl">Event</span>
+            <div class="field"><input id="bEventName" readonly></div>
+          </div>
+        </div>
+        <div class="pane" data-p="1">
+          <h3>When?</h3>
+          <p class="hint" id="dateHint">Choose a date, then a time.</p>
+          <div class="dates" id="bDates"></div>
+          <span class="lbl">Time</span>
+          <div class="slots" id="bSlots"></div>
+        </div>
+        <div class="pane" data-p="2">
+          <h3>How many guests?</h3>
+          <p class="hint" id="guestHint">Tables seat up to 12. Larger groups: choose an event type.</p>
+          <div class="counter"><button type="button" data-g="-1" aria-label="Fewer guests">−</button><output id="bGuests">2</output><button type="button" data-g="1" aria-label="More guests">+</button></div>
+          <div id="pkgWrap" style="display:none">
+            <span class="lbl">Choose a package (per person)</span>
+            <div class="pkgs" id="bPkgs"></div>
+          </div>
+          <div id="occWrap">
+            <span class="lbl">Occasion (optional)</span>
+            <div class="pills" id="bOcc"></div>
+          </div>
+        </div>
+        <div class="pane" data-p="3">
+          <h3>Your details</h3>
+          <p class="hint">So we can confirm your booking.</p>
+          <div class="row2">
+            <div class="field"><label for="bName">Full name</label><input id="bName" autocomplete="name" required><div class="msg">Please enter your name</div></div>
+            <div class="field"><label for="bPhone">Phone / WhatsApp</label><input id="bPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="07xx xxx xxx" required><div class="msg">Enter a valid phone number</div></div>
+          </div>
+          <div class="field" id="venueField" style="display:none"><label for="bVenue">Venue / location</label><input id="bVenue" placeholder="Where is the event?"></div>
+          <div class="field"><label for="bEmail">Email (optional)</label><input id="bEmail" type="email" autocomplete="email"></div>
+          <div class="field"><label for="bNotes">Notes (optional)</label><textarea id="bNotes" placeholder="Allergies, seating, cake message…"></textarea></div>
+          <div class="summary" id="bSummary"></div>
+        </div>
+        <div class="pane-nav">
+          <button type="button" class="btn btn-ghost" id="bBack" style="visibility:hidden">‹ Back</button>
+          <button type="button" class="btn btn-red" id="bNext" data-ripple>Continue <span class="arr">›</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- VIBE -->
+<section class="block" id="vibe">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Good food, great mood</span>
+      <h2>The Vibe</h2>
+      <p>Warm lights, sizzling grills, good music and a team that smiles. Here's what a night at Arisa's feels like.</p>
+      <div class="bar"></div>
+    </div>
+    <div class="masonry reveal">
+      <figure class="m-big"><img src="assets/chef-studio.jpg" alt="Our chef in the kitchen" loading="lazy" style="object-position:50% 25%"><figcaption>Our kitchen, our pride</figcaption></figure>
+      <figure class="chalk"><em>Cook.</em><em>Serve.</em><em>Smile.</em></figure>
+      <figure><img src="assets/plate.jpg" alt="Grilled chicken plate" loading="lazy"><figcaption>Fire-grilled chicken</figcaption></figure>
+      <figure class="m-tall"><img src="assets/chef-outdoor.jpg" alt="Chef outdoors in uniform" loading="lazy" style="object-position:50% 20%"><figcaption>Outdoor catering</figcaption></figure>
+      <figure class="quote">"Every plate leaves the pass the way we'd serve it to family."<small>— The Arisa's team</small></figure>
+      <figure><img src="assets/dish-juices.jpg" alt="Fresh juices" loading="lazy"><figcaption>Squeezed daily</figcaption></figure>
+      <figure class="m-wide" style="background:#ffd84a"><img src="assets/packaging-set.webp" alt="Arisa's Kitchen packaging" loading="lazy" style="object-fit:contain;padding:8px"><figcaption>Takeaway, done right</figcaption></figure>
+      <figure><img src="assets/dish-desserts.jpg" alt="Cheesecake" loading="lazy"><figcaption>Save room for dessert</figcaption></figure>
+    </div>
+    <div class="vibe-row">
+      <div class="reveal"><span class="e">🎶</span><span><b>Live music Fridays</b><small>Acoustic sets from 7 pm</small></span></div>
+      <div class="reveal"><span class="e">👨‍👩‍👧</span><span><b>Family friendly</b><small>Kids' portions & high chairs</small></span></div>
+      <div class="reveal"><span class="e">📶</span><span><b>Free Wi-Fi</b><small>Work-lunch approved</small></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- MERCH -->
+<section class="block" id="merch">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Take the mood home</span>
+      <h2>Merch & Packaging</h2>
+      <p>Wear the brand, carry the sunshine. Merch can be added to any food order or picked up in store.</p>
+      <div class="bar"></div>
+    </div>
+    <div class="merch-grid" id="merchGrid"></div>
+    <div class="pack-wrap reveal">
+      <div class="pack-show">
+        <img class="set" src="assets/packaging-set.webp" alt="Arisa's Kitchen packaging: cup, carry bag, burger box, fries sleeve, juice cup and salad bowl" loading="lazy" width="1200" height="613">
+        <div>
+          <h3>Packaging that keeps it hot, fresh & happy</h3>
+          <p style="color:var(--brown-2);margin:4px 0 14px">Every order leaves in our sunshine-yellow set, designed so food arrives the way it left the kitchen.</p>
+          <div class="pack-list" id="packList"></div>
+          <div class="eco"><span>♻️ Recyclable</span><span>🌱 Compostable bowls</span><span>🚫 No plastic bags</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="block" id="about">
+  <div class="wrap about">
+    <div class="about-img reveal">
+      <img src="assets/chef-outdoor.jpg" alt="Arisa's Kitchen chef" loading="lazy" style="object-position:50% 25%">
+      <div class="stamp">Made<br>with<br>Love ♥</div>
+    </div>
+    <div class="reveal">
+      <span class="script" style="color:var(--red);font-size:1.3rem">Our story</span>
+      <h2>About Arisa's Kitchen</h2>
+      <p>We serve delicious meals made with fresh ingredients and lots of love. Whether you dine in, order online or book us for an event, Arisa's Kitchen is your home for good food and a great mood.</p>
+      <p>Our menu brings together fire-grilled favourites, Kenyan home cooking and international comfort food, all made fresh every day.</p>
+      <div class="values">
+        <div><span class="e">🍴</span><b>Great taste</b></div>
+        <div><span class="e">🥬</span><b>Fresh ingredients</b></div>
+        <div><span class="e">❤️</span><b>Made with love</b></div>
+      </div>
+      <div class="cta-row"><a href="#menu" class="btn btn-red" data-ripple>See the menu <span class="arr">›</span></a><a href="#visit" class="btn btn-ghost">Find us</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section class="block" id="visit">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Come say hi</span>
+      <h2>Find Us</h2>
+      <p>Dine in, pick up, or check whether we deliver to you.</p>
+      <div class="bar"></div>
+    </div>
+    <div class="visit">
+      <div style="position:relative" class="reveal">
+        <div id="map" role="region" aria-label="Map showing Arisa's Kitchen location"></div>
+        <div class="map-note" id="mapNote">🗺️ The live map loads on your published site.</div>
+      </div>
+      <div class="info reveal">
+        <div class="card">
+          <h4>Opening hours</h4>
+          <div class="hours" id="hours"></div>
+        </div>
+        <div class="card">
+          <h4>Contact</h4>
+          <div class="contact-list" id="contact"></div>
+          <div class="cta-row" style="margin-top:14px">
+            <a class="btn btn-sun btn-sm" id="dirBtn" target="_blank" rel="noopener">🧭 Directions</a>
+            <a class="btn btn-sm" id="waBtn" target="_blank" rel="noopener"><svg width="16" height="16"><use href="#i-wa"/></svg>WhatsApp us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img src="assets/logo-sm.png" alt="Arisa's Kitchen" width="80" height="80" style="margin-bottom:10px">
+        <div class="tag-line">Good Food • Great Mood</div>
+      </div>
+      <div><h5>Explore</h5><a href="#menu">Menu</a><a href="#signature">Signature dishes</a><a href="#events">Events</a><a href="#merch">Merch</a></div>
+      <div><h5>Help</h5><a href="#book">Book a table</a><a href="#" data-open="track">Track order</a><a href="#visit">Contact & hours</a><a href="admin.html">Staff login</a></div>
+      <div>
+        <h5>Get our offers</h5>
+        <p style="font-size:.9rem">New dishes and event invites. No spam.</p>
+        <form class="sub-form" id="subForm"><input type="email" placeholder="Your email" required aria-label="Email"><button class="btn btn-sun btn-sm">Subscribe</button></form>
+      </div>
+    </div>
+    <div class="copy"><span>© <span id="yr"></span> Arisa's Kitchen. All rights reserved.</span><span>Made with ♥ in Nairobi</span></div>
+  </div>
+</footer>
+
+<!-- Mobile tab bar -->
+<nav class="tabbar" aria-label="Quick">
+  <a href="#home" data-tab="home"><svg width="22" height="22"><use href="#i-home"/></svg>Home</a>
+  <a href="#menu" data-tab="menu"><svg width="22" height="22"><use href="#i-menu"/></svg>Menu</a>
+  <button class="order-fab" data-open="cart" aria-label="Cart"><span class="c"><svg width="24" height="24"><use href="#i-cart"/></svg></span><span class="badge" data-cart-count>0</span></button>
+  <a href="#book" data-tab="book"><svg width="22" height="22"><use href="#i-cal"/></svg>Book</a>
+  <button data-open="track"><svg width="22" height="22"><use href="#i-track"/></svg>Track</button>
+</nav>
+
+<!-- Install banner -->
+<div class="install-banner" id="installBanner" role="dialog" aria-label="Install app">
+  <img src="icons/icon-192.png" alt="">
+  <div><b>Get the Arisa's app</b><span id="installText">Faster ordering, right from your home screen.</span></div>
+  <button class="btn btn-sun btn-sm" id="installGo">Install</button>
+  <button class="icon-btn" id="installX" aria-label="Dismiss"><svg width="18" height="18"><use href="#i-x"/></svg></button>
+</div>
+
+<div class="scrim" id="scrim"></div>
+
+<!-- Cart drawer -->
+<aside class="drawer" id="cart" aria-label="Your order" aria-hidden="true">
+  <div class="drawer-h">
+    <button class="icon-btn" id="cartBack" style="display:none" aria-label="Back">‹</button>
+    <h3 id="cartTitle">Your order</h3>
+    <button class="icon-btn" data-close aria-label="Close"><svg width="20" height="20"><use href="#i-x"/></svg></button>
+  </div>
+  <div class="drawer-b" id="cartBody"></div>
+  <div class="drawer-f" id="cartFoot"></div>
+</aside>
+
+<!-- Item sheet -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Customise item">
+  <button class="close-x" data-close aria-label="Close"><svg width="18" height="18"><use href="#i-x"/></svg></button>
+  <div class="grab"></div>
+  <div id="sheetInner" style="display:contents"></div>
+</div>
+
+<!-- Generic modal -->
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="box"><button class="close-x" data-close aria-label="Close"><svg width="18" height="18"><use href="#i-x"/></svg></button><div id="modalBody"></div></div>
+</div>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="vendor/leaflet/leaflet.js" defer></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
